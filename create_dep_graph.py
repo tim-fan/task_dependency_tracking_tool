@@ -149,6 +149,12 @@ def get_node_fill_color(node_str:str, G:nx.DiGraph):
 def print_node(node:str, G:nx.DiGraph):
     fill_color = get_node_fill_color(node, G)
     label = f"""{node}\l\l{G.nodes[node]["comment"]}"""
+
+    # # Code for anonymising the node lables, used to generate the example graph in the readme
+    # import random
+    # import string
+    # label= "task_" + ''.join(random.choice(string.ascii_lowercase) for _ in range(5))
+
     print(f"    \"{node}\" [label=\"{label}\",style=filled,fillcolor={fill_color}]")
 
 def graph_from_deps(deps:List[str]) -> nx.DiGraph:

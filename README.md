@@ -4,6 +4,16 @@ Script for parsing task dependencies as captured in a workflowy list export, and
 
 Includes logic for determining/presenting which tasks are complete, which can be done next, and which are awaiting external events.
 
+![example dependency graph](example_deps.png)
+
+**Figure**: Dependency graph created for planning an international relocation (including moving house, work related items, immigration related tasks etc). Task labels are anonymised for privacy.
+
+Legend for the above figure:
+* Grey = task complete
+* Blue = task awaiting external event
+* Green = task can be done now (no outstanding dependencies)
+* White = task with outstanding dependencies (cannot be completed at current time)
+
 ## Notation:
 
 The graph is represented in workflowy in dot notation, where each workflowy list entry represents one node or edge.
