@@ -170,6 +170,7 @@ def graph_from_deps(deps:List[str]) -> nx.DiGraph:
 
 def set_node_info(node_info:dict, G:nx.DiGraph):
 
+    # set nodes complete and comment
     for node in G.nodes:
 
         if node in node_info.keys():
@@ -178,6 +179,12 @@ def set_node_info(node_info:dict, G:nx.DiGraph):
         else:
             complete = False
             comment = ""
+    
+        G.nodes[node]["complete"] = complete
+        G.nodes[node]["comment"] = comment
+    
+    # set nodes next and waiting
+    for node in G.nodes:
         
         # 'next' if not complete and all parents complete
         all_parents_complete = True
@@ -191,8 +198,7 @@ def set_node_info(node_info:dict, G:nx.DiGraph):
 
         G.nodes[node]["waiting"] = is_waiting
         G.nodes[node]["next"] = is_next
-        G.nodes[node]["complete"] = complete
-        G.nodes[node]["comment"] = comment
+
 
             
 
