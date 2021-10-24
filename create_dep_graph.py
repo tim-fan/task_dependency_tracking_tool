@@ -4,7 +4,7 @@
 Create Dep Graph.
 
 Usage:
-  create_dep_graph.py [--list-next] [--list-awaiting] [--koi-list]
+  create_dep_graph.py [--list-next] [--list-awaiting] [--koi-list] [--progress]
   create_dep_graph.py -h | --help
 
 Options:
@@ -12,6 +12,7 @@ Options:
   --list-next       Print all 'next' items
   --list-awaiting   Print all 'next' items
   --koi-list        Instead of plotting a graph, print Koi's todo list
+  --progress        Print percentage of nodes complete
 """
 
 from typing import List, Tuple
@@ -191,10 +192,9 @@ def set_node_info(node_info:dict, G:nx.DiGraph):
         for parent in G.predecessors(node):
             if not G.nodes[parent]["complete"]:
                 all_parents_complete = False        
-        is_next = (not complete) and all_parents_complete
+        is_next = (not G.nodes[node]["complete"]) and all_parents_complete
 
         is_waiting = is_next and node.startswith("await")
-
 
         G.nodes[node]["waiting"] = is_waiting
         G.nodes[node]["next"] = is_next
@@ -237,6 +237,16 @@ def print_awaiting_list(G:nx.DiGraph):
             # if comment:
             #     print(f"    {comment}")
 
+def print_progress(G:nx.DiGraph):
+
+    n_nodes = 0
+    n_complete = 0
+    for node in G.nodes():
+        n_nodes += 1
+        if G.nodes[node]["complete"]:
+            n_complete += 1
+    print(f"Completed {n_complete/n_nodes*100:.1f}% of tasks complete ({n_complete} out of {n_nodes}).")
+
 if __name__ == "__main__":
 
     arguments = docopt(__doc__)
@@ -253,6 +263,8 @@ if __name__ == "__main__":
         print_todo_list(G)
     elif arguments["--list-awaiting"]:
         print_awaiting_list(G)
+    elif arguments["--progress"]:
+        print_progress(G)
     else:
         print_graph_header()
 

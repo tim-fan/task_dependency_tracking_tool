@@ -42,3 +42,7 @@ Some additional mark up is supported for adding task metadata:
 3) Run `./create_dep_graph.py | xdot -` to generate the graph and view in `xdot` interactive visualiser.
 
 See also `./create_dep_graph.py -h` for options for generating lists of next items and awaitables.
+
+## ToDo:
+
+* completion % report
