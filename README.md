@@ -39,7 +39,7 @@ Some additional mark up is supported for adding task metadata:
 
 1) In workflowy, select the task list, then `export` -> `plain text`
 2) Copy/paste from the export window into a file in this directory named `deps.txt`
-3) Run `./create_dep_graph.py | xdot -` to generate the graph and view in `xdot` interactive visualiser.
+3) Run `./create_dep_graph.py | xdot -` to generate the graph and view in `xdot` interactive visualiser, or `./create_dep_graph.py | dot -Tpng > deps.png` to save as `.png`.
 
 See also `./create_dep_graph.py -h` for options for generating lists of next items and awaitables.
 
